@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: jdbc:postgresql://localhost:5434/paymentdb
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: payment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+server:
+  port: 8082
+
+logging:
+  level:
+    myapp: DEBUG

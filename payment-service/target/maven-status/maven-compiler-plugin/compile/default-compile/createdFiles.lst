@@ -1,0 +1,4 @@
+paymentservice\entity\Payment.class
+paymentservice\repository\PaymentRepository.class
+paymentservice\consumer\PaymentConsumer.class
+paymentservice\PaymentApp.class

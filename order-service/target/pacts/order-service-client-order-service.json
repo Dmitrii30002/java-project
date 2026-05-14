@@ -1,0 +1,142 @@
+{
+  "consumer": {
+    "name": "order-service-client"
+  },
+  "interactions": [
+    {
+      "description": "a request to create an order",
+      "providerStates": [
+        {
+          "name": "create order"
+        }
+      ],
+      "request": {
+        "body": {
+          "amount": 100.0,
+          "customerName": "Test User",
+          "status": "PENDING"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$.amount": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$.customerName": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        },
+        "method": "POST",
+        "path": "/api/orders"
+      },
+      "response": {
+        "body": {
+          "amount": 100.0,
+          "createdAt": "string",
+          "customerName": "Test User",
+          "id": 1,
+          "status": "PENDING"
+        },
+        "generators": {
+          "body": {
+            "$.createdAt": {
+              "size": 20,
+              "type": "RandomString"
+            }
+          }
+        },
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "matchingRules": {
+          "body": {
+            "$.amount": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "number"
+                }
+              ]
+            },
+            "$.createdAt": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.customerName": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.status": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      }
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.1.43"
+    },
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  },
+  "provider": {
+    "name": "order-service"
+  }
+}
